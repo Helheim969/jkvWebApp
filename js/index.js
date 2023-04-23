@@ -17,7 +17,7 @@ $(document).ready(function () {
           'content-type': 'application/json'
         },
         processData: false,
-        data: '{"included_segments":["Subscribed Users"],"contents":{"en":"English or Any Language Message","es":"Spanish Message"},"name":"INTERNAL_CAMPAIGN_NAME"}'
+        data: '{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","included_segments":["Subscribed Users"],"contents":{"en":"English or Any Language Message","es":"Spanish Message"},"name":"INTERNAL_CAMPAIGN_NAME"}'
       };
       
       $.ajax(settings).done(function (response) {
