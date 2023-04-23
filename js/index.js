@@ -17,7 +17,7 @@ function getData()
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods":"GET,HEAD,OPTIONS,POST,PUT",
         'Access-Control-Allow-Credentials':'true',
-        'Access-Control-Allow-Headers':'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization'
+        'Access-Control-Allow-Headers':'Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization'
     },
     success: function (response) {
         var resp = JSON.parse(response)
