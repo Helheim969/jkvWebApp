@@ -4,25 +4,8 @@ let imgSrc = '../ori/Linea';
 // $('#btn-show-modal').hide();
 const orders = [];
 $(document).ready(function () {
-
     $('#btn-show-modal').click();
-    const settings = {
-        async: true,
-        crossDomain: true,
-        url: 'https://onesignal.com/api/v1/notifications',
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Basic NTcyNTcxNGUtODgwNi00YmE1LTkwY2UtODMzNmE0ZjczYzRi',
-          'content-type': 'application/json'
-        },
-        processData: false,
-        data: '{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","included_segments":["Subscribed Users"],"contents":{"en":"English or Any Language Message","es":"Spanish Message"},"name":"INTERNAL_CAMPAIGN_NAME"}'
-      };
-      
-      $.ajax(settings).done(function (response) {
-        console.log(response);
-      });
+
 
 });
 
@@ -67,16 +50,18 @@ async function getData() {
     </div>
         `);
         $('#alert-no-order').toggleClass('d-none');
-        notifyMe();
+        let message="Nueva orden sin revisar\n"+result.orderNumber+"\n"+result.orderType+"\n"+result.clientDepartment + ', ' + result.clientMunicipality + ', ' + result.clientDistrict + ', ' + result.clientAddress;
+        notifyMe(message);
+        sendNotification(message);
 
     }
     console.log(orders);
 }
 
 
-function notifyMe() {
+function notifyMe(message) {
 
-    let options={icon:"../ori/" + imgSrc+".png",body:"ESTA ES UNA DESCRIPCION DE ORDEN"}
+    let options={icon:"../ori/" + imgSrc+".png",body:message}
     if (!("Notification" in window)) {
         // Check if the browser supports notifications
         alert("This browser does not support desktop notification");
@@ -159,3 +144,23 @@ document.addEventListener("visibilitychange", () => {
     }
   });
 
+function sendNotification(message)
+{
+    const settings = {
+        async: true,
+        crossDomain: true,
+        url: 'https://onesignal.com/api/v1/notifications',
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Basic NTcyNTcxNGUtODgwNi00YmE1LTkwY2UtODMzNmE0ZjczYzRi',
+          'content-type': 'application/json'
+        },
+        processData: false,
+        data: `{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","included_segments":["Subscribed Users"],"name":"PRUEBA_DE_NOMBRE","contents":{"en":"English or Any Language Message","es":"${message}"}}`
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
