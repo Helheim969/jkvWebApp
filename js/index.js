@@ -138,7 +138,7 @@ document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") {
 
     } else {
-        notifyMe();
+        // notifyMe();
     }
   });
 
