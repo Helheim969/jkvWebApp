@@ -1,28 +1,32 @@
-let time=250;
-$( document ).ready(function() {
+let time = 250;
+const orders = [];
+$(document).ready(function () {
 
-    // setInterval(()=>getData(),10000)
+    setInterval(()=>getData(),10000)
 });
 
-function getData()
-{
-//     fetch('https://jkvwebservice.onrender.com/api/getInfo')
-//   .then(response => response.json())
-//   .then(data => console.log(data));
-
-  $.ajax({
-    url: "https://jkvwebservice.onrender.com/api/getInfo",
-    type: "GET",
-    headers: {
-        "Access-Control-Allow-Origin":"*"
-
-    },
-    success: function (response) {
-        var resp = JSON.parse(response)
-        console.log(resp);
-    },
-    error: function (xhr, status) {
-        console.log(xhr);
+async function getData() {
+    let x = await fetch('https://jkvwebservice.onrender.com/api/getInfo');
+    let result = await x.json();
+    console.log(result);
+    if(result.newOrder)
+    {
+    if (orders.length) {
+        orders.forEach(element => {
+            if (element.orderNumber!=result.orderNumber) {
+                orders.push(result);
+                console.log("Nueva orden")
+                return;
+            }
+        });
     }
-});
+    else
+    {
+        orders.push(result);
+        console.log("Nueva orden")
+    }
+    }
+
+console.log(orders);
 }
+
