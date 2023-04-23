@@ -14,10 +14,10 @@ function getData()
     url: "https://jkvwebservice.onrender.com/api/getInfo",
     type: "GET",
     headers: {
-        "Access-Control-Allow-Origin": "*",
-        'Access-Control-Allow-Credentials':'true',
-        'Access-Control-Allow-Headers':'*',
-         "Access-Control-Allow-Methods":"GET,HEAD,OPTIONS,POST,PUT"
+        "Access-Control-Allow-Origin":"*",
+        "Access-Control-Allow-Credentials":"true",
+        "Access-Control-Allow-Headers":"*",
+        "Access-Control-Allow-Methods":"GET,HEAD,OPTIONS,POST,PUT"
     },
     success: function (response) {
         var resp = JSON.parse(response)
