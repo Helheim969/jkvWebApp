@@ -1,12 +1,13 @@
 let time = 250;
-let context = 'hfc';
+let context = 'adsl';
+let imgSrc = '../ori/Linea';
 // $('#btn-show-modal').hide();
 const orders = [];
 $(document).ready(function () {
 
     $('#btn-show-modal').click();
-    
-    
+
+
 });
 
 async function getData() {
@@ -57,20 +58,22 @@ async function getData() {
 
 
 function notifyMe() {
+
+    let options={icon:"../ori/" + imgSrc+".png",body:"ESTA ES UNA DESCRIPCION DE ORDEN"}
     if (!("Notification" in window)) {
         // Check if the browser supports notifications
         alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
         // Check whether notification permissions have already been granted;
         // if so, create a notification
-        const notification = new Notification("Hi there!");
+        new Notification("Nueva orden!",{icon:"../ori/" + imgSrc+".png"});
         // …
     } else if (Notification.permission !== "denied") {
         // We need to ask the user for permission
         Notification.requestPermission().then((permission) => {
             // If the user accepts, let's create a notification
             if (permission === "granted") {
-                const notification = new Notification("Hi there!");
+                new Notification("Nueva orden!",options);
                 // …
             }
         });
@@ -82,29 +85,60 @@ function notifyMe() {
 
 function closeAlert(e) {
     console.log($('.alert-pending-order').length)
-    if ($('.alert-pending-order').length==1) { 
+    if ($('.alert-pending-order').length == 1) {
         $('#alert-no-order').toggleClass('d-none');
     }
 }
 
-$(document).on('click','.context',(e)=>{
-    let valueButton='';
-    switch($(e.target).attr('context'))
-    {
+$(document).on('click', '.context', (e) => {
+    let valueButton = '';
+
+    switch ($(e.target).attr('context')) {
         case 'adsl':
-            valueButton='Linea';
+            valueButton = 'Linea';
+            imgSrc = 'Linea';
+            context='adsl';
             break;
-            case 'hfc':
-                valueButton='HFC';
-                break;
-                case 'dth':
-                    valueButton='DTH';
-                    break;
+        case 'hfc':
+            valueButton = 'HFC';
+            imgSrc = 'Hfc';
+            context='hfc';
+            break;
+        case 'dth':
+            valueButton = 'DTH';
+            imgSrc = 'Dth';
+            context='dth';
+            break;
     }
-    $('#btn-combobox').html(valueButton)
+    $('#btn-combobox').html(valueButton);
+
 });
 
-$('#btn-hide-modal').click((e)=>{
+$('#btn-hide-modal').click((e) => {
+    let headerText = ''
+    switch (context) {
+        case 'adsl':
+            headerText = 'Linea';
+            break;
+        case 'hfc':
+            headerText = 'HFC';
+            break;
+        case 'dth':
+            headerText = 'DTH';
+            break;
+    }
+
+    $('#header-context-text').html($('#header-context-text').html()+headerText);
+    $('#header-context-image').attr('src','../ori/' + imgSrc+'.png');
+    notifyMe();
     setInterval(() => getData(), 10000)
 });
+
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+
+    } else {
+        notifyMe();
+    }
+  });
 
