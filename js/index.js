@@ -6,7 +6,24 @@ const orders = [];
 $(document).ready(function () {
 
     $('#btn-show-modal').click();
-
+    const options = {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'NTcyNTcxNGUtODgwNi00YmE1LTkwY2UtODMzNmE0ZjczYzRi',
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          included_segments: ['Subscribed Users'],
+          contents: {en: 'A new order', es: 'Nueva orden registrada'},
+          name: 'Prueba_de_notificacion'
+        })
+      };
+      
+      fetch('https://onesignal.com/api/v1/notifications', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
 
 });
 
@@ -52,6 +69,7 @@ async function getData() {
         `);
         $('#alert-no-order').toggleClass('d-none');
         notifyMe();
+
     }
     console.log(orders);
 }
@@ -130,7 +148,7 @@ $('#btn-hide-modal').click((e) => {
 
     $('#header-context-text').html($('#header-context-text').html()+headerText);
     $('#header-context-image').attr('src','../ori/' + imgSrc+'.png');
-    notifyMe();
+    // notifyMe();
     setInterval(() => getData(), 10000)
 });
 
