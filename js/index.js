@@ -1,37 +1,27 @@
 let time = 250;
+let context = 'hfc';
+// $('#btn-show-modal').hide();
 const orders = [];
 $(document).ready(function () {
+
+    $('#btn-show-modal').click();
     
-    setInterval(()=>getData(),10000)
+    
 });
 
 async function getData() {
-    let x = await fetch('https://jkvwebservice.onrender.com/api/getInfo');
+    let x = await fetch('https://jkvwebservice.onrender.com/api/getInfo?context=' + context);
     let result = await x.json();
     console.log(result);
-    if(result.newOrder)
-    {
-    if (orders.length) {
-        orders.forEach(element => {
-            if (element.orderNumber!=result.orderNumber) {
-                orders.push(result);
-                addAlert(result);
-                console.log("Nueva orden");
-                return;
-            }
-        });
-    }
-    else
-    {
-        addAlert(result);
-        orders.push(result);
-        console.log("Nueva orden")
-    }
+    if (result.newOrder) {
+        if (!(orders.find(order => order.orderNumber == result.orderNumber))) {
+            orders.push(result);
+            addAlert(result);
+        }
     }
 
 
-    function addAlert(result)
-    {
+    function addAlert(result) {
         $('.container').append(`
         <div class="alert alert-warning alert-dismissible fade show alert-pending-order" role="alert">
         <h4 class="alert-heading text-center">
@@ -55,45 +45,66 @@ async function getData() {
         <hr>
         <p class="text-center">${result.orderType}</p>
         <hr>
-        <p class="mb-0 text-center">${result.clientDepartment+', '+result.clientMunicipality+', '+result.clientDistrict+', '+result.clientAddress}</p>
+        <p class="mb-0 text-center">${result.clientDepartment + ', ' + result.clientMunicipality + ', ' + result.clientDistrict + ', ' + result.clientAddress}</p>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick='closeAlert(this)'></button>
     </div>
         `);
         $('#alert-no-order').toggleClass('d-none');
         notifyMe();
     }
-console.log(orders);
+    console.log(orders);
 }
 
 
 function notifyMe() {
     if (!("Notification" in window)) {
-      // Check if the browser supports notifications
-      alert("This browser does not support desktop notification");
+        // Check if the browser supports notifications
+        alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
-      // Check whether notification permissions have already been granted;
-      // if so, create a notification
-      const notification = new Notification("Hi there!");
-      // …
+        // Check whether notification permissions have already been granted;
+        // if so, create a notification
+        const notification = new Notification("Hi there!");
+        // …
     } else if (Notification.permission !== "denied") {
-      // We need to ask the user for permission
-      Notification.requestPermission().then((permission) => {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          const notification = new Notification("Hi there!");
-          // …
-        }
-      });
+        // We need to ask the user for permission
+        Notification.requestPermission().then((permission) => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("Hi there!");
+                // …
+            }
+        });
     }
-  
+
     // At last, if the user has denied notifications, and you
     // want to be respectful there is no need to bother them anymore.
-  }
+}
 
-  function closeAlert(e)
-  {
-   if(!$('.alert-pending-order').length){
-    $('#alert-no-order').toggleClass('d-none');
-   }
-  }
-  
+function closeAlert(e) {
+    console.log($('.alert-pending-order').length)
+    if ($('.alert-pending-order').length==1) { 
+        $('#alert-no-order').toggleClass('d-none');
+    }
+}
+
+$(document).on('click','.context',(e)=>{
+    let valueButton='';
+    switch($(e.target).attr('context'))
+    {
+        case 'adsl':
+            valueButton='Linea';
+            break;
+            case 'hfc':
+                valueButton='HFC';
+                break;
+                case 'dth':
+                    valueButton='DTH';
+                    break;
+    }
+    $('#btn-combobox').html(valueButton)
+});
+
+$('#btn-hide-modal').click((e)=>{
+    setInterval(() => getData(), 10000)
+});
+

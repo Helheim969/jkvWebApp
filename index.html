@@ -11,6 +11,46 @@
 </head>
 <body>
     <div class="container">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none" id="btn-show-modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Seleccione un rubro</h1>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        </div>
+        <div class="modal-body">
+            <div class="btn-group" style="width:100%">
+                <button type="button" class="btn btn-primary dropdown-toggle" id="btn-combobox" style="width:100%" data-bs-toggle="dropdown" aria-expanded="false">
+                  Linea
+                </button>
+                <ul class="dropdown-menu text-center" style="width:100%">
+                  <li context="adsl"><a context="adsl" class="dropdown-item context" href="#">Linea</a></li>
+                  <li context="hfc"><a  context="hfc" class="dropdown-item context" href="#">HFC</a></li>
+                  <li context="dth"><a context="dth" class="dropdown-item context" href="#">DTH</a></li>
+                </ul>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="btn-hide-modal" data-bs-dismiss="modal">Seleccionar</button>
+          <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
                 <path
