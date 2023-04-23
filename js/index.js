@@ -6,24 +6,23 @@ const orders = [];
 $(document).ready(function () {
 
     $('#btn-show-modal').click();
-    const options = {
+    const settings = {
+        async: true,
+        crossDomain: true,
+        url: 'https://onesignal.com/api/v1/notifications',
         method: 'POST',
         headers: {
           accept: 'application/json',
-          Authorization: 'NTcyNTcxNGUtODgwNi00YmE1LTkwY2UtODMzNmE0ZjczYzRi',
+          Authorization: 'Basic NTcyNTcxNGUtODgwNi00YmE1LTkwY2UtODMzNmE0ZjczYzRi',
           'content-type': 'application/json'
         },
-        body: JSON.stringify({
-          included_segments: ['Subscribed Users'],
-          contents: {en: 'A new order', es: 'Nueva orden registrada'},
-          name: 'Prueba_de_notificacion'
-        })
+        processData: false,
+        data: '{"included_segments":["Subscribed Users"],"contents":{"en":"English or Any Language Message","es":"Spanish Message"},"name":"INTERNAL_CAMPAIGN_NAME"}'
       };
       
-      fetch('https://onesignal.com/api/v1/notifications', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
 
 });
 
