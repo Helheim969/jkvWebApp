@@ -92,7 +92,7 @@ function notifyMe() {
 
   function closeAlert(e)
   {
-   {
+   if(!$('.alert-pending-order').length){
     $('#alert-no-order').toggleClass('d-none');
    }
   }
