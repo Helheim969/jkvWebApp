@@ -6,6 +6,15 @@ const orders = [];
 $(document).ready(function () {
     $('#btn-show-modal').click();
 
+    OneSignal.isPushNotificationsEnabled(function (isEnabled) {
+        if (isEnabled) {
+            // user has subscribed
+            OneSignal.getUserId(function (userId) {
+                console.log('player_id of the subscribed user is : ' + userId);
+                // Make a POST call to your server with the user ID        
+            });
+        }
+    });
 
 });
 
