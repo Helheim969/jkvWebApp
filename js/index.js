@@ -60,7 +60,7 @@ async function getData() {
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick='closeAlert(this)'></button>
     </div>
         `);
-        $('#alert-no-order').toggleClass('d-none');
+        $('#alert-no-order').addClass('d-none');
         let message="Nueva orden sin revisar\n"+result.orderNumber+"\n"+result.orderType+"\n"+result.clientDepartment + ', ' + result.clientMunicipality + ', ' + result.clientDistrict + ', ' + result.clientAddress;
         // notifyMe(message);
         sendNotification(message);
@@ -99,7 +99,7 @@ function notifyMe(message) {
 function closeAlert(e) {
     console.log($('.alert-pending-order').length)
     if ($('.alert-pending-order').length == 1) {
-        $('#alert-no-order').toggleClass('d-none');
+        $('#alert-no-order').removeClass('d-none');
     }
 }
 
