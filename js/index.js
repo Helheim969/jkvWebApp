@@ -23,7 +23,7 @@ $(document).ready(function () {
 async function getData() {
     let x = await fetch('https://jkvwebservice.onrender.com/api/getInfo?context=' + context);
     let result = await x.json();
-    console.log(result);
+    // console.log(result);
     if (result.newOrder) {
         if (!(orders.find(order => order.orderNumber == result.orderNumber))) {
             orders.push(result);
@@ -67,7 +67,7 @@ async function getData() {
         sendNotification(title,message);
 
     }
-    console.log(orders);
+    // console.log(orders);
 }
 
 
@@ -146,7 +146,7 @@ $('#btn-hide-modal').click((e) => {
     $('#header-context-image').attr('src','../ori/' + imgSrc+'.png');
     // notifyMe();
     // sendNotification("Ha seleccionado el rubro de "+context);
-    setInterval(() => getData(), 10000)
+    setInterval(() => getData(), 5000)
 });
 
 document.addEventListener("visibilitychange", () => {
