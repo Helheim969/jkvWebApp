@@ -6,7 +6,7 @@ let user_id='';
 const orders = [];
 $(document).ready(function () {
     $('#btn-show-modal').click();
-    console.log("Qué mira maricón, chismoso.")
+    // console.log("Qué mira maricón, chismoso.")
     OneSignal.isPushNotificationsEnabled(function (isEnabled) {
         if (isEnabled) {
             // user has subscribed
