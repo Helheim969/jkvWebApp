@@ -98,7 +98,7 @@ function notifyMe(message) {
 }
 
 function closeAlert(e) {
-    console.log($('.alert-pending-order').length)
+    // console.log($('.alert-pending-order').length)
     if ($('.alert-pending-order').length == 1) {
         $('#alert-no-order').removeClass('d-none');
     }
@@ -175,6 +175,6 @@ function sendNotification(title,message)
     //   console.log("REQUEST:");
     //   console.log(`{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","include_player_ids":["${user_id}"],"name":"PRUEBA_DE_NOMBRE","contents":{"en":"English or Any Language Message","es":"${message}"}}`);
       $.ajax(settings).done(function (response) {
-        console.log(response);
+        // console.log(response);
       });
 }
