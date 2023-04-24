@@ -144,6 +144,7 @@ $('#btn-hide-modal').click((e) => {
     $('#header-context-text').html($('#header-context-text').html()+headerText);
     $('#header-context-image').attr('src','../ori/' + imgSrc+'.png');
     // notifyMe();
+    sendNotification("Prueba de envio de mensaje a usuario individual");
     setInterval(() => getData(), 10000)
 });
 
