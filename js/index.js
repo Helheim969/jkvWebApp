@@ -1,6 +1,7 @@
 let time = 250;
 let context = 'adsl';
 let imgSrc = '../ori/Linea';
+let user_id='';
 // $('#btn-show-modal').hide();
 const orders = [];
 $(document).ready(function () {
@@ -10,8 +11,9 @@ $(document).ready(function () {
         if (isEnabled) {
             // user has subscribed
             OneSignal.getUserId(function (userId) {
-                console.log('player_id of the subscribed user is : ' + userId);
+                // console.log('player_id of the subscribed user is : ' + userId);
                 // Make a POST call to your server with the user ID        
+                user_id=userId;
             });
         }
     });
@@ -166,7 +168,7 @@ function sendNotification(message)
           'content-type': 'application/json'
         },
         processData: false,
-        data: `{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","included_segments":["Subscribed Users"],"name":"PRUEBA_DE_NOMBRE","contents":{"en":"English or Any Language Message","es":"${message}"}}`
+        data: `{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8",“include_player_ids”:[“${user_id}”],"name":"PRUEBA_DE_NOMBRE","contents":{"en":"English or Any Language Message","es":"${message}"}}`
       };
       
       $.ajax(settings).done(function (response) {
