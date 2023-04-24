@@ -62,7 +62,7 @@ async function getData() {
         `);
         $('#alert-no-order').toggleClass('d-none');
         let message="Nueva orden sin revisar\n"+result.orderNumber+"\n"+result.orderType+"\n"+result.clientDepartment + ', ' + result.clientMunicipality + ', ' + result.clientDistrict + ', ' + result.clientAddress;
-        notifyMe(message);
+        // notifyMe(message);
         sendNotification(message);
 
     }
