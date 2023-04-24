@@ -64,7 +64,7 @@ async function getData() {
         let title="Nueva orden sin revisar";
         let message=result.orderType+"\n"+result.orderNumber+"\n"+result.clientDepartment + ', ' + result.clientMunicipality + ', ' + result.clientDistrict + ', ' + result.clientAddress;
         // notifyMe(message);
-        sendNotification(title,subtitle,message);
+        sendNotification(title,message);
 
     }
     console.log(orders);
