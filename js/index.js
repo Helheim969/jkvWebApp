@@ -144,7 +144,7 @@ $('#btn-hide-modal').click((e) => {
     $('#header-context-text').html($('#header-context-text').html()+headerText);
     $('#header-context-image').attr('src','../ori/' + imgSrc+'.png');
     // notifyMe();
-    sendNotification("Prueba de envio de mensaje a usuario individual");
+    // sendNotification("Prueba de envio de mensaje a usuario individual");
     setInterval(() => getData(), 10000)
 });
 
@@ -169,10 +169,10 @@ function sendNotification(message)
           'content-type': 'application/json'
         },
         processData: false,
-        data: `{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","include_player_ids":["${user_id}"],"name":"PRUEBA_DE_NOMBRE","contents":{"en":"English or Any Language Message","es":"${message}"}}`
+        data: `{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","include_player_ids":["${user_id}"],"name":"Nueva orden de trabajo","url":"https://heroic-hotteok-9c4a32.netlify.app/","chrome_web_icon":"../icon.png","contents":{"en":"English or Any Language Message","es":"${message}"}}`
       };
-      console.log("REQUEST:");
-      console.log(`{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","include_player_ids":["${user_id}"],"name":"PRUEBA_DE_NOMBRE","contents":{"en":"English or Any Language Message","es":"${message}"}}`);
+    //   console.log("REQUEST:");
+    //   console.log(`{"app_id":"4795363c-9db9-4805-b9f3-1b258285b5b8","include_player_ids":["${user_id}"],"name":"PRUEBA_DE_NOMBRE","contents":{"en":"English or Any Language Message","es":"${message}"}}`);
       $.ajax(settings).done(function (response) {
         console.log(response);
       });
